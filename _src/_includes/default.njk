@@ -1,0 +1,73 @@
+---
+eleventyComputed:
+  title: "{{ framed['https://schema.org/mainEntity']['https://schema.org/headline'] }}"
+---
+<!doctype html>
+
+<html itemscope itemtype="https://schema.org/WebPage" itemid="{{ framed['@id'] }}" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title itemprop="https://schema.org/name">Maciek Lewkowicz (@macieklewkowicz)</title>
+
+  {#
+    {{ framed['https://schema.org/mainEntity']['https://schema.org/headline'] or framed['https://schema.org/mainEntity']['https://schema.org/name'] }}
+    – {{ framed['https://schema.org/isPartOf']['https://schema.org/isPartOf']['https://schema.org/name'] }}
+  </title>#}
+
+  <meta name="view-transition" content="same-origin">
+  <link rel="canonical" href="{{ ["https://macieklewkowicz.pl", page.url] | join | url }}">
+  
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  {#<link href="https://unpkg.com/prismjs@v1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />#}
+
+</head>
+
+<body>
+
+<header>
+<span>{{ framed['https://schema.org/isPartOf']['https://schema.org/isPartOf']['https://schema.org/name'] }}</span>
+</header>
+
+{#
+<nav role="navigation">
+<ul>
+{%- for article in collections.all -%}
+<li><a href="{{ article.data.page.url }}">{{ article.data.framed['https://schema.org/name'] | safe }}</li>
+{%- endfor -%}
+</ul>
+</nav>
+#}
+
+{% if framed['https://schema.org/mainEntity']["https://schema.org/isPartOf"]["https://schema.org/url"] != page.permalink %}
+⮤ <a href="{{ framed['https://schema.org/mainEntity']['https://schema.org/isPartOf']['https://schema.org/url'] }}">{{ framed['https://schema.org/mainEntity']["https://schema.org/isPartOf"]["https://schema.org/name"] }}</a>
+{% endif %}
+
+{{ content | safe }}
+
+<footer>
+{#<pre>{{ framed | dump(2) | safe }}</pre>#}
+
+<div>
+<p class="license">
+<small>Copyright © 2024 Maciej Lewkowicz.</small>
+</p>
+<p class="license">
+<small>This page doesn't use cookies.</small>
+</p>
+
+{#
+<ul class="footer-links">
+  <li><a href="https://github.com/macieklewkowicz/macieklewkowicz.pl">Source</a></li>
+  <li><a href={{ "/sitemap.xml" | url }}>Sitemap</a></link></li>
+</ul>
+#}
+</div>
+</footer>
+
+{#}
+<script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+<script src="https://unpkg.com/prismjs@v1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+#}
+</body>
+</html>

@@ -1,0 +1,19 @@
+@base <https://macieklewkowicz.pl/> .
+@prefix schema: <https://schema.org/> .
+
+<projects/szuflada/>
+  a schema:WebPage ;
+  schema:name "Szuflada" ;
+  schema:mainEntityOfPage <projects/szuflada#it> ;
+  schema:url <projects/szuflada> .
+
+<projects/szuflada#it>
+  a schema:WebApplication ;
+  schema:name "Szuflada" ;
+  schema:author <#me> ;
+  schema:keywords <almanac/svelte#it> ;
+  schema:keywords <almanac/remotestorage#it> .
+
+<almanac/svelte#it>
+  a schema:Thing ;
+  schema:name "Svelte" .

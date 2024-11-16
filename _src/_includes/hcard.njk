@@ -1,0 +1,20 @@
+---
+layout: default.njk
+---
+
+<main itemscope itemprop="https://schema.org/mainEntity" itemtype="https://schema.org/Person" itemid="https://macieklewkowicz.pl/#me">
+<article class="h-card" id="me">
+  <hgroup>
+    <h1 class="p-name" itemprop="https://schema.org/name">{{ name }}</h1>
+    <p class="p-nickname" itemprop="https://schema.org/alternateName">{{ nickname }}</p>
+  </hgroup>
+  <p class="p-note">{{ note | safe }}</p>
+
+  <p>You'll find me on</p>
+  <ul>
+  {% for link in me | sort(false, false, 'name') %}
+  <li><a class="u-url" rel="me" href="{{ link.url | url }}">{{ link.name }}</a></li>
+  {% endfor %}
+  </ul>
+</article>
+</main>

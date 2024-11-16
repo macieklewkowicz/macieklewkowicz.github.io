@@ -1,0 +1,19 @@
+@base <https://macieklewkowicz.pl/> .
+@prefix schema: <https://schema.org/> .
+
+<>
+  a schema:WebPage ;
+  schema:name "Homepage" ;
+  schema:url "/" ;
+  schema:isPartOf <#website> ;
+  schema:mainEntity <#me> .
+
+<#me>
+  a schema:Person ;
+  schema:name "Maciek Lekwowicz" .
+
+<#website>
+  a schema:Website ;
+  schema:url "/" ;
+  schema:name "by @macieklewkowicz" .
+

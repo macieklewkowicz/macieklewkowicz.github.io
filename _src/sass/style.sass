@@ -1,0 +1,221 @@
+:root
+  color-scheme: light dark
+
+html
+  height: 100%
+  position: relative
+  background: light-dark(white, black)
+  color: light-dark(black, white)
+  font-family: sans
+  font-size: 17px
+  line-height: 22px
+  //background-image: repeating-linear-gradient(to bottom, lightskyblue 0 1px, transparent 1px 1lh)
+
+body
+  margin: 0
+  padding: 0
+  min-height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+
+pre
+  max-width: 100%
+  overflow: scroll
+
+nav
+  overflow: hidden
+  margin: 1rlh 0
+
+  ul,
+  li
+    list-style: none
+    margin: 0
+    padding: 0
+
+  ul
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    justify-content: space-between
+
+  a
+    padding: rlh 0
+ 
+main
+  width: 44rlh
+  max-width: 100%
+  box-sizing: border-box
+  padding: 1rlh
+  margin: 0 auto
+
+footer
+  width: 100%
+  box-sizing: border-box
+  padding: 1rlh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-between
+
+  small
+    font-size: 0.5rlh
+    line-height: 1
+    text-align: center
+
+  .license
+    text-align: center
+    margin: 0.5rlh auto
+
+  .footer-links
+    list-style: none
+    display: block
+    text-align: center
+    margin: 1rlh
+    padding: 0
+    li
+      list-style: none
+      margin: 0
+      padding: 0
+      display: inline
+      font-size: 0.5rlh
+      line-height: 0.5rlh
+
+
+      &::before
+        content: " | "
+
+      &:first-child::before
+        content: none
+
+hr
+  background: none
+  border: none
+  display: block
+  width: 100%
+  color: inherit
+  margin: 0
+  padding: 0
+
+article footer
+  display: block
+  padding: 0
+  width: 100%
+
+  &::before
+    content: '⁂'
+    text-align: center
+    display: block
+    margin: 1rlh
+
+.tags
+  p
+    display: inline
+
+  ul,
+  li
+    display: inline
+    list-style: none
+    margin: 0
+    padding: 0
+
+  li::after
+    content: ', '
+
+  li:nth-last-child(2):first-child::after
+    content: none
+
+  li:last-child::before
+    content: ' and '
+
+  li:last-child::after
+    content: '.'
+
+// SHAME
+p
+  margin: 1lh 0
+  
+hgroup:has(h1)
+  text-align: center
+
+h1
+  text-transform: capitalize
+  font-size: 1em
+  font-weight: bold
+  margin: 1lh 0
+
+h2
+  text-align: left
+  text-transform: capitalize
+  font-size: 1em
+  font-weight: bold
+
+h3
+  text-align: left
+  text-transform: capitalize
+  font-size: 1em
+  font-style: italic
+  font-weight: bold
+
+[itemprop="https://schema.org/alternativeHeadline"]
+  text-align: center
+
+  &::before
+    content: '• '
+
+  &::after
+    content: ' •'
+
+.h-card
+  width: 12rlh
+  max-width: 100%
+  margin: 1rlh auto
+  padding: 1rlh
+  background: rgba(127, 127, 127, 0.25)
+
+  ul,
+  li
+    display: inline
+    list-style: none
+    margin: 0
+    padding: 0
+
+  li::after
+    content: ', '
+
+  li:nth-last-child(2):first-child::after
+    content: none
+
+  li:last-child::before
+    content: ' and '
+
+  li:last-child::after
+    content: '.'
+
+  p:has(+ ul)
+    display: inline
+
+  p + ul
+    &::before
+      content: ' '
+      display: inline
+
+    &::after
+      content: ''
+      display: block
+      margin: 0 0 1rlh
+
+.p-nickname
+    &::before
+      content: '@'
+      color: #777
+
+ul
+  margin: 1rlh 0
+
+li
+  line-height: 1rlh
+  font-size: 1rem
+  margin: 0
+  padding: 0

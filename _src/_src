@@ -1,0 +1,6 @@
+@base <https://macieklewkowicz.pl/> .
+@prefix schema: <https://schema.org/ .
+
+<almanac/eleventy/>
+  a schema:WebPage ;
+  schema:name "Eleventy" .
