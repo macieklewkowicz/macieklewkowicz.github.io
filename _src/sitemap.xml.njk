@@ -1,0 +1,21 @@
+---
+layout: blank
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl" ?>
+<urlset
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:schema="http://schema.org/"
+>
+    {% for page in collections.all %}
+        <url>
+            <schema:name>{{ page.data.framed["https://schema.org/mainEntity"]["https://schema.org/name"] }}</schema:name>
+            <loc>{{ site.url }}{{ page.url | url }}</loc>
+            <lastmod>{{ page.date.toISOString() }}</lastmod>
+        </url>
+    {% endfor %}
+</urlset>

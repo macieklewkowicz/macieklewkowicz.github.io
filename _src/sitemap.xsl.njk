@@ -1,0 +1,32 @@
+---
+layout: blank
+permalink: /sitemap.xsl
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet
+  version="1.0"
+  xmlns:schema="http://schema.org/"
+  xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+>
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Sitemap by @macieklewkowicz</title>
+                <link rel="stylesheet" href="/css/style.css"/>
+            </head>
+            <body>
+                <h1>Sitemap</h1>
+                <dl>
+                    <xsl:for-each select="sitemap:urlset/sitemap:url">
+                        <dt><a href="https://maciek.lewkowi.cz{sitemap:loc}"><xsl:value-of select="schema:name" /></a></dt>
+                        <dd>Last updated on <time><xsl:value-of select="substring(sitemap:lastmod, 1, 10)" /> at <xsl:value-of select="substring(sitemap:lastmod, 12, 8)" /></time></dd>
+                    </xsl:for-each>
+                </dl>
+                {% include 'footer.njk' %}
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
+

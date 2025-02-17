@@ -17,6 +17,12 @@ pipeline {
                 - sleep
                 args:
                 - 99d
+              - name: xml
+                image: leplusorg/xml:main
+                command:
+                - sleep
+                args:
+                - 99d
           '''
         } // kubernetes
       } // agent
@@ -27,6 +33,13 @@ pipeline {
             hadolint --format sarif --no-fail Dockerfile > test-results/hadolint.json
           '''
         } // container 'hadolint'
+
+        container('xml') {
+          sh '''
+            find _site -name "*.xml" \
+            | xargs -I '{}' xmllint '{}'
+          '''
+        } // container 'xml'
       } // steps
 
       post {

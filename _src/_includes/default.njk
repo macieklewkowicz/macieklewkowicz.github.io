@@ -45,25 +45,7 @@ eleventyComputed:
 
 {{ content | safe }}
 
-<footer>
-{#<pre>{{ framed | dump(2) | safe }}</pre>#}
-
-<div>
-<p class="license">
-<small>Copyright © 2024 Maciej Lewkowicz.</small>
-</p>
-<p class="license">
-<small>This page doesn't use cookies.</small>
-</p>
-
-{#
-<ul class="footer-links">
-  <li><a href="https://github.com/macieklewkowicz/macieklewkowicz.pl">Source</a></li>
-  <li><a href={{ "/sitemap.xml" | url }}>Sitemap</a></link></li>
-</ul>
-#}
-</div>
-</footer>
+{% include 'footer.njk' %}
 
 {#}
 <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
