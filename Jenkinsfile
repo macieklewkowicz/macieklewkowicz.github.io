@@ -2,6 +2,51 @@ pipeline {
   agent none
 
   stages {
+    stage('lint') {
+      agent {
+        kubernetes {
+          yaml '''
+            spec:
+              containers:
+              - name: jnlp
+                image: 'harbor.k8s.lan/smol/jenkins-inbound-agent'
+                args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+              - name: hadolint
+                image: hadolint/hadolint:v2.12.0-alpine
+                command:
+                - sleep
+                args:
+                - 99d
+          '''
+        }
+      }
+
+      steps {
+        container('hadolint') {
+          sh '''
+            hadolint --format sarif --no-fail Dockerfile > test-results/hadolint.json
+          '''
+        }
+      }
+
+      post {
+        always {
+          discoverGitReferenceBuild()
+
+          recordIssues \
+            aggregatingResults: true,
+            enabledForFailure: false,
+            qualityGates: [
+              [integerThreshold: 1, threshold: 1.0, type: 'TOTAL']
+            ],
+            sourceCodeRetention: 'LAST_BUILD',
+            tools: [
+              sarif(pattern: 'test-results/**/*.json')
+           ]
+        }
+      }
+    }
+
     stage('build') {
       agent {
         kubernetes {
