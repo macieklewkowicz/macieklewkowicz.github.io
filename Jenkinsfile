@@ -18,20 +18,21 @@ pipeline {
                 args:
                 - 99d
           '''
-        }
-      }
+        } // kubernetes
+      } // agent
 
       steps {
         container('hadolint') {
           sh '''
             hadolint --format sarif --no-fail Dockerfile > test-results/hadolint.json
           '''
-        }
-      }
+        } // container 'hadolint'
+      } // steps
 
       post {
         always {
-          discoverGitReferenceBuild()
+          discoverGitReferenceBuild \
+            targetBranch: 'main'
 
           recordIssues \
             aggregatingResults: true,
@@ -43,9 +44,9 @@ pipeline {
             tools: [
               sarif(pattern: 'test-results/**/*.json')
            ]
-        }
-      }
-    }
+        } // always
+      } // post
+    } // stage 'lint'
 
     stage('build') {
       agent {
@@ -75,12 +76,12 @@ pipeline {
                         - key: .dockerconfigjson
                           path: config.json
           '''
-        }
-      }
+        } // kubernetes
+      } // agent
 
       environment {
         GIT_REPO_NAME = "${GIT_URL}".replaceFirst(/^.*?(?::\/\/.*?\/|:)(.*?)(\.git)?$/, '$1')
-      }
+      } // environment
 
       steps {
         container('kaniko') {
@@ -105,7 +106,7 @@ pipeline {
           'Verified': 1
         ],
         message: "${env.BUILD_URL}"
-    }
+    } // success
 
     unstable {
       gerritReview \
@@ -114,7 +115,7 @@ pipeline {
           'Verified': 0
         ],
         message: "${env.BUILD_URL}"
-    }
+    } // unstable
 
     failure {
       gerritReview \
@@ -123,7 +124,6 @@ pipeline {
           'Verified': -1
         ],
         message: "${env.BUILD_URL}"
-    }
-  }
-}
-
+    } // failure
+  } // post
+} // pipeline
