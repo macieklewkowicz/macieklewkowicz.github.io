@@ -1,0 +1,20 @@
+image: node:22
+
+before_script:
+  - npm ci
+
+cache:
+  paths:
+    - .cache/
+    - node_modules/
+
+pages:
+  stage: deploy
+  script:
+    - npm run build
+    - mv _site public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
